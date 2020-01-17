@@ -26,7 +26,7 @@ public class redisAspect {
     Map<String, String> map;
 
 
-    @Pointcut("@annotation(com.yzc.scould.annotation.SendCache)")
+    @Pointcut("@annotation(com.yangzhichao.yzclib.aop.annotation.SendCache)")
     public void whenNeedSeachCache() {
 
     }
