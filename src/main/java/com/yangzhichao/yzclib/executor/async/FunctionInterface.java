@@ -1,6 +1,6 @@
 package com.yangzhichao.yzclib.executor.async;
 
-public interface Lambda {
+public interface FunctionInterface {
 
     void lambdaFunction();
 }

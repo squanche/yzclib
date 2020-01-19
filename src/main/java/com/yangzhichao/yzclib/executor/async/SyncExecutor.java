@@ -23,12 +23,12 @@ public class SyncExecutor {
 
     public static void main(String[] args) {
         SyncExecutor syncExecutor = new SyncExecutor();
-
+        //使用异步线程执行任务
         syncExecutor.threadPoolExecutor.execute(() -> {
             System.out.println("异步处理任务信息");
         });
-
-        Lambda lambda = syncExecutor::say;
+        //使用函数式接口调用方法
+        FunctionInterface lambda = syncExecutor::say;
         lambda.lambdaFunction();
 
 
