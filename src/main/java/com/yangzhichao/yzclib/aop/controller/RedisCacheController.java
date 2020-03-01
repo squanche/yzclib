@@ -20,7 +20,7 @@ import java.util.HashSet;
 public class RedisCacheController {
 
 
-    @Value("${sql.aaa}")
+   // @Value("${sql.aaa}")
     HashSet<String> hashSet;
 
     @SendCache(key = "dc:homePage")

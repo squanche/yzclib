@@ -2,6 +2,8 @@ package com.yangzhichao.yzclib.executor.async;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -33,12 +35,17 @@ public class SyncExecutor {
         FunctionInterface lambda = syncExecutor::say;
         lambda.lambdaFunction();
         while (syncExecutor.threadPoolExecutor.getActiveCount() > 0) {
-                Thread.sleep(5000);
+            Thread.sleep(5000);
         }
         syncExecutor.threadPoolExecutor.shutdown();
 
+        try {
+            byte[] a = "fasdf".getBytes(StandardCharsets.UTF_8.displayName());
+            new String(a);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
 
     }
-
-
 }
