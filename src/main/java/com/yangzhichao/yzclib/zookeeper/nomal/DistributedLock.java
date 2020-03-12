@@ -1,4 +1,4 @@
-package com.yangzhichao.yzclib.zookeeper;
+package com.yangzhichao.yzclib.zookeeper.nomal;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.*;

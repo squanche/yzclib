@@ -20,5 +20,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SendCache {
     @NotNull
-    String key() ;
+    String key();
 }

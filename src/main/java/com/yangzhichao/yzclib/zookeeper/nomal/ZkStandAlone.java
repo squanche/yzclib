@@ -1,12 +1,10 @@
-package com.yangzhichao.yzclib.zookeeper;
+package com.yangzhichao.yzclib.zookeeper.nomal;
 
-import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -27,10 +25,21 @@ public class ZkStandAlone {
             CountDownLatch countDownLatch = new CountDownLatch(1);
 
 
-            String kvm = "192.168.79.131:2181";
+            String kvm = "localhost:2181";
             String path = "/zktest";
             zk = new ZooKeeper(kvm, 400000, (WatchedEvent watchedEvent) -> {
                 if (Watcher.Event.KeeperState.SyncConnected == watchedEvent.getState()) {
+
+                    try {
+                        if(Objects.isNull(zk.exists(path,false))){
+                            zk.create(path, "yanghzichao".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                        }
+                    } catch (KeeperException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     if (Watcher.Event.EventType.None == watchedEvent.getType() && null == watchedEvent.getPath()) {
                         countDownLatch.countDown();
                     } else if (watchedEvent.getType() == Watcher.Event.EventType.NodeDataChanged) {
@@ -42,12 +51,8 @@ public class ZkStandAlone {
                 }
             });
             countDownLatch.await();
-            System.out.println(zk.getState());
-            System.out.println(new String(zk.getData(path, true, stat)));
             Thread.sleep(Integer.MAX_VALUE);
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (KeeperException e) {
             e.printStackTrace();
         }
 
