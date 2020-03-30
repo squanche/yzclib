@@ -1,7 +1,6 @@
 package com.yangzhichao.yzclib.aop.annotation;
 
-import com.sun.istack.internal.NotNull;
-
+import javax.validation.constraints.NotNull;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

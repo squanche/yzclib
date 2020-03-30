@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    include: datasource,mybatis,kafka
+server:
+  port: 4396 # 监听端口
+
+log:
+  level: info
+  path: app.log
+
+
+
+

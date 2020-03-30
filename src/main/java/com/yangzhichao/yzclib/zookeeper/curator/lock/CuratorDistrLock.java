@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-@Component
+//@Component
 public class CuratorDistrLock implements InitializingBean {
 
     //zk的连接地址

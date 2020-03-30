@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * @author yangzhichao<yangzhichao @ cecdat.com>
@@ -27,6 +26,17 @@ public class SyncExecutor {
 
     public static void main(String[] args) throws InterruptedException {
         SyncExecutor syncExecutor = new SyncExecutor();
+
+
+        FutureTask futureTask = new FutureTask(new Callable() {
+            @Override
+            public Object call() throws Exception {
+                return null;
+            }
+        });
+//        syncExecutor.threadPoolExecutor.submit(futureTask)
+
+
         //使用异步线程执行任务
         syncExecutor.threadPoolExecutor.execute(() -> {
             log.info("异步处理任务信息");

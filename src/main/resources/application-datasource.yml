@@ -1,0 +1,64 @@
+#spring:
+#  datasource:
+#    driverClassName: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/dc_sys2_dev?currentSchema=cecdcc&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true
+#    username: postgres
+#    password: postgres
+#    filters: stat,wall
+#    initialSize: 10
+#    minIdle: 10
+#    maxActive: 150
+#    minEvictableIdleTimeMillis: 300000
+#    timeBetweenEvictionRunsMillis: 60000
+#    maxWait: 60000
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+
+#spring:
+#  datasource:
+#    druid:
+#      stat-view-servlet:
+#        loginUsername: admin
+#        loginPassword: 123456
+#    dynamic:
+#      druid: #以下是全局默认值，可以全局更改
+#        filters: stat,wall # 注意这个值和druid原生不一致，默认启动了stat,wall
+#      datasource:
+#        master:
+#          username: postgres
+#          password: postgres
+#          driver-class-name: org.postgresql.Driver
+#          url: jdbc:postgresql://localhost:5432/dc_sys2_dev?currentSchema=cecdcc&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true
+#        slave_1:
+#          url: jdbc:postgresql://localhost:5432/dc_sys2_dev?currentSchema=cecdcc&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true
+#          username: postgres
+#          password: postgres
+#          driver-class-name: org.postgresql.Driver
+
+spring:
+  datasource:
+    druid:
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+    dynamic:
+      druid:
+        filters: stat,wall
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候回抛出异常,不启动会使用默认数据源.
+      datasource:
+        master:
+          url: jdbc:postgresql://127.0.0.1:5432/dc_sys2_dev?currentSchema=cecdcc&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
+        slave:
+          url: jdbc:postgresql://127.0.0.1:5432/dc_sys2_dev1?currentSchema=cecdcc&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
